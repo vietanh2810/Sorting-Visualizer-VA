@@ -44,5 +44,6 @@
     "eslint-plugin-react": "^7.31.11",
     "husky": "^8.0.0",
     "lint-staged": "^13.1.0"
-  }
+  },
+  "homepage": "https://vietanh2810.github.io/Sorting-Visualizer-VA/"
 }
