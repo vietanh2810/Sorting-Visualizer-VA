@@ -1,22 +1,27 @@
-import React from "react";
-import "./SortingVisualizer.css";
-import {getMergeSortAnimations} from "../SortingAlgorithms/MergeSort.js";
-import {getBubbleSortAnimations} from "../SortingAlgorithms/BubbleSort.js";
-import {getInsertionSortAnimations} from "../SortingAlgorithms/InsertionSort.js";
+import React from 'react';
+import {getMergeSortAnimations} from '../SortingAlgorithms/MergeSort.js';
+import {getBubbleSortAnimations} from '../SortingAlgorithms/BubbleSort.js';
+import {getInsertionSortAnimations} from '../SortingAlgorithms/InsertionSort.js';
+import './SortingVisualizer.css';
 
-const ANIMATION_SPEED_MS = 1;
+// Change this value for the speed of the animations.
+const ANIMATION_SPEED_MS = 5;
 
-const NUMBER_OF_ARRAY_BARS = 310;
+// Change this value for the number of bars (value) in the array.
+const NUMBER_OF_ARRAY_BARS = 79;
 
-const PRIMARY_COLOR = "turquoise";
+// This is the main color of the array bars.
+const PRIMARY_COLOR = 'turquoise'
 
-const SECONDARY_COLOR = "red";
+// This is the color of array bars that are being compared throughout the animations.
+const SECONDARY_COLOR = 'red';
 
 export default class SortingVisualizer extends React.Component {
-    constructor(props) {    
+    constructor(props) {
         super(props);
+
         this.state = {
-            array: [],
+        array: [],
         };
     }
 
@@ -27,7 +32,7 @@ export default class SortingVisualizer extends React.Component {
     resetArray() {
         const array = [];
         for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
-            array.push(this.randomIntFromInterval(5, 730));
+        array.push(randomIntFromInterval(5, 730));
         }
         this.setState({array});
     }
@@ -124,28 +129,29 @@ export default class SortingVisualizer extends React.Component {
         const {array} = this.state;
 
         return (
-            <>
+            <div className='app'>
                 <div className="array-container">
                     {array.map((value, idx) => (
-                        <div 
-                            className="array-bar" 
-                            key={idx}
-                            style={{height: `${value}px`}}>
-                        </div>
+                    <div
+                        className="array-bar"
+                        key={idx}
+                        style={{
+                        backgroundColor: PRIMARY_COLOR,
+                        height: `${value}px`,
+                        }}></div>
                     ))}
                 </div>
-                <div className="buttons">
+                    <div className='buttons'>
                     <button onClick={() => this.resetArray()}>Generate New Array</button>
                     <button onClick={() => this.mergeSort()}>Merge Sort</button>
                     <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
                     <button onClick={() => this.insertionSort()}>Insertion Sort</button>
                 </div>
-            </>
-
+            </div>
         );
     }
+}
 
-    randomIntFromInterval(min, max) { // min and max included
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    }
+function randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
